@@ -65,15 +65,19 @@ public with sharing class OrderNPSApiIntegration {
                         System.debug('API Response: ' + httpResponse.getBody());
                         order.NPS_API_SENT__c = true;
                         order.NPS_API_Status_Code__c = String.valueOf(httpResponse.getStatusCode());
+
+                        result.errorMessage = null;
+                        results.add(result);    
                     } else {
                         // Handle API errors here
                         System.debug('API Request Failed with Status Code: ' + httpResponse.getStatusCode());
                         System.debug('API Response: ' + httpResponse.getBody());
                         order.NPS_API_Status_Code__c = String.valueOf(httpResponse.getStatusCode());
+
+                        result.errorMessage = String.valueOf(httpResponse.getStatusCode());
+                        results.add(result);
                     }
 
-                    result.errorMessage = String.valueOf(httpResponse.getStatusCode());
-                    results.add(result);
 
                     update order;
                 } catch (Exception e) {
