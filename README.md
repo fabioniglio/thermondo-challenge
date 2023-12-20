@@ -24,13 +24,13 @@ In the next step we would like you to implement a simple Invocable Apex Action t
 * [X] use `sfdx` and `git`, commit all code and metadata needed (so we can test with a scratch org)
 * [X] write good meaningful unit tests
 * [X] properly separate concerns
-* [ ] make a list of limitations/possible problems
+* [X] make a list of limitations/possible problems
 
 ### ✨ Bonus Points:
 
-* [ ] layer your Code (use [apex-common](https://github.com/apex-enterprise-patterns/fflib-apex-common) if you like)
+* [X] layer your Code (use [apex-common](https://github.com/apex-enterprise-patterns/fflib-apex-common) if you like)
 * [ ] use Inversion of Control to write true unit tests and not integration tests
-* [ ] make sure customers don't get duplicate emails
+* [X] make sure customers don't get duplicate emails
 * [X] think of error handling and return them to the Flow for the Admins to handle
 
 ### What if I don't finish?
