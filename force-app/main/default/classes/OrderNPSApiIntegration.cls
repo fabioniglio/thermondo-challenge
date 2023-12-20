@@ -18,6 +18,7 @@ public with sharing class OrderNPSApiIntegration {
     @InvocableMethod(label='Send Order to API')
     public static List<OutputVariables> sendOrderToApi(List<InputVariables> inputParameters) {
         List<OutputVariables> results = new List<OutputVariables>();
+        OutputVariables result = new OutputVariables();
 
         // Check if inputParameters is not empty and contains an Order Id
         if (inputParameters != null && inputParameters.size() > 0) {
@@ -53,7 +54,7 @@ public with sharing class OrderNPSApiIntegration {
                 
                 // Create an HTTP client
                 Http http = new Http();
-                OutputVariables result = new OutputVariables();
+                
                 
                 try {
                     // Send the HTTP request and get the response
@@ -78,8 +79,8 @@ public with sharing class OrderNPSApiIntegration {
                         results.add(result);
                     }
 
-
-                    update order;
+                    Database.update(order, true);
+                    
                 } catch (Exception e) {
                     // Handle any exceptions that occur during the request
                     System.debug('API Request Exception: ' + e.getMessage());
@@ -89,10 +90,14 @@ public with sharing class OrderNPSApiIntegration {
             } else {
                 // Handle the case when the Order is not found
                 System.debug('Order not found with Id: ' + orderId);
+                result.errorMessage = 'Order not found with Id: ' + orderId;
+                results.add(result);
             }
         } else {
             // Handle the case when inputParameters is empty
             System.debug('Order Id parameters not provided');
+            result.errorMessage = 'Order Id parameters not provided';
+            results.add(result);
         }
 
         return results;
